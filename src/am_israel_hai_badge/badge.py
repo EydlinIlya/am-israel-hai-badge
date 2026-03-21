@@ -24,7 +24,7 @@ _SVG_TEMPLATE = """\
   </text>
   <!-- commit count -->
   <text x="396" y="32" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#6b7280" text-anchor="end">
-    {commits} commits
+    {commits} commits / 30d
   </text>
   <!-- subtitle -->
   <text x="28" y="52" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="500" fill="#6b7280" font-style="italic">
