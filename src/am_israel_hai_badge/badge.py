@@ -28,7 +28,7 @@ _SVG_TEMPLATE = """\
   </text>
   <!-- subtitle -->
   <text x="28" y="52" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="500" fill="#6b7280" font-style="italic">
-    Time spent in shelter
+    Time spent in bomb shelter
   </text>
   <!-- divider -->
   <line x1="28" y1="64" x2="396" y2="64" stroke="#e5e7eb" stroke-width="1"/>
