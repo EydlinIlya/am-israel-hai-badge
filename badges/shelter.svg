@@ -11,11 +11,11 @@
   <rect x="4" y="0" width="4" height="120" fill="#dc2626"/>
   <!-- title -->
   <text x="28" y="32" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#dc2626">
-    🛡️ Time Spent in Shelter
+    🛡️ Deliver No Matter What
   </text>
   <!-- subtitle -->
   <text x="28" y="52" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="500" fill="#6b7280" font-style="italic">
-    Deliver no matter what
+    Time spent in shelter
   </text>
   <!-- divider -->
   <line x1="28" y1="64" x2="396" y2="64" stroke="#e5e7eb" stroke-width="1"/>
