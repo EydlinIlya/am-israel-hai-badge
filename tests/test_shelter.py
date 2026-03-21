@@ -3,7 +3,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from am_israel_hai_badge.models import Alert, SignalType
-from am_israel_hai_badge.shelter import compute_sessions, total_shelter_seconds
+from am_israel_hai_badge.shelter import compute_sessions, shelter_seconds_in_window, total_shelter_seconds
 
 TZ = ZoneInfo("Asia/Jerusalem")
 AREAS = ["חיפה - מפרץ", "מפרץ חיפה"]
@@ -132,6 +132,67 @@ class TestTotalShelterSeconds(unittest.TestCase):
         ]
         sessions = compute_sessions(alerts, AREAS)
         self.assertEqual(total_shelter_seconds(sessions), 600)
+
+
+class TestShelterSecondsInWindow(unittest.TestCase):
+    def _sessions(self, *specs):
+        """Build sessions from (entry_min, exit_min) tuples."""
+        from am_israel_hai_badge.models import ShelterSession
+        result = []
+        for entry_min, exit_min in specs:
+            result.append(ShelterSession(
+                entry_time=datetime(2026, 3, 20, 14, entry_min, 0, tzinfo=TZ),
+                exit_time=datetime(2026, 3, 20, 14, exit_min, 0, tzinfo=TZ) if exit_min is not None else None,
+                entry_signal=SignalType.ACTIVE_ALERT,
+                area="חיפה - מפרץ",
+            ))
+        return result
+
+    def test_fully_inside_window(self):
+        sessions = self._sessions((5, 15))
+        w_start = datetime(2026, 3, 20, 14, 0, 0, tzinfo=TZ)
+        w_end = datetime(2026, 3, 20, 14, 30, 0, tzinfo=TZ)
+        self.assertEqual(shelter_seconds_in_window(sessions, w_start, w_end), 600)
+
+    def test_clipped_at_start(self):
+        """Session starts before window — only count time inside window."""
+        sessions = self._sessions((0, 20))
+        w_start = datetime(2026, 3, 20, 14, 10, 0, tzinfo=TZ)
+        w_end = datetime(2026, 3, 20, 14, 30, 0, tzinfo=TZ)
+        self.assertEqual(shelter_seconds_in_window(sessions, w_start, w_end), 600)
+
+    def test_clipped_at_end(self):
+        """Session ends after window — only count time inside window."""
+        sessions = self._sessions((5, 25))
+        w_start = datetime(2026, 3, 20, 14, 0, 0, tzinfo=TZ)
+        w_end = datetime(2026, 3, 20, 14, 15, 0, tzinfo=TZ)
+        self.assertEqual(shelter_seconds_in_window(sessions, w_start, w_end), 600)
+
+    def test_clipped_both_sides(self):
+        sessions = self._sessions((0, 30))
+        w_start = datetime(2026, 3, 20, 14, 10, 0, tzinfo=TZ)
+        w_end = datetime(2026, 3, 20, 14, 20, 0, tzinfo=TZ)
+        self.assertEqual(shelter_seconds_in_window(sessions, w_start, w_end), 600)
+
+    def test_outside_window(self):
+        sessions = self._sessions((0, 5))
+        w_start = datetime(2026, 3, 20, 14, 10, 0, tzinfo=TZ)
+        w_end = datetime(2026, 3, 20, 14, 20, 0, tzinfo=TZ)
+        self.assertEqual(shelter_seconds_in_window(sessions, w_start, w_end), 0)
+
+    def test_ongoing_uses_window_end(self):
+        """Ongoing session (no exit) counts up to window_end."""
+        sessions = self._sessions((10, None))
+        w_start = datetime(2026, 3, 20, 14, 0, 0, tzinfo=TZ)
+        w_end = datetime(2026, 3, 20, 14, 25, 0, tzinfo=TZ)
+        self.assertEqual(shelter_seconds_in_window(sessions, w_start, w_end), 900)
+
+    def test_multiple_sessions(self):
+        sessions = self._sessions((0, 10), (20, 30))
+        w_start = datetime(2026, 3, 20, 14, 5, 0, tzinfo=TZ)
+        w_end = datetime(2026, 3, 20, 14, 25, 0, tzinfo=TZ)
+        # first: clipped to 5-10 = 300s, second: clipped to 20-25 = 300s
+        self.assertEqual(shelter_seconds_in_window(sessions, w_start, w_end), 600)
 
 
 if __name__ == "__main__":

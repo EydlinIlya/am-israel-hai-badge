@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from datetime import datetime
+
 from .models import Alert, ShelterSession, SignalType
 
 
@@ -65,3 +67,24 @@ def compute_sessions(alerts: list[Alert], area_names: list[str]) -> list[Shelter
 def total_shelter_seconds(sessions: list[ShelterSession]) -> float:
     """Sum duration of all completed sessions (ongoing sessions contribute 0)."""
     return sum(s.duration_seconds for s in sessions)
+
+
+def shelter_seconds_in_window(
+    sessions: list[ShelterSession],
+    window_start: datetime,
+    window_end: datetime,
+) -> float:
+    """Sum shelter seconds, clipping sessions to a time window.
+
+    Sessions that overlap the window edges are clipped (not dropped).
+    Ongoing sessions (no exit_time) use window_end as a stand-in exit.
+    """
+    total = 0.0
+    for s in sessions:
+        exit_time = s.exit_time if s.exit_time is not None else window_end
+        # Clip to window
+        start = max(s.entry_time, window_start)
+        end = min(exit_time, window_end)
+        if end > start:
+            total += (end - start).total_seconds()
+    return total
