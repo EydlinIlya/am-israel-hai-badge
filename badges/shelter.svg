@@ -27,11 +27,11 @@
   <line x1="140" y1="74" x2="140" y2="108" stroke="#e5e7eb" stroke-width="1"/>
   <text x="210" y="90" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#374151" text-anchor="middle">
     <tspan font-weight="700" fill="#dc2626">7d</tspan>
-    <tspan x="210" dy="16" font-size="15" font-weight="700" fill="#1f2937">3h</tspan>
+    <tspan x="210" dy="16" font-size="15" font-weight="700" fill="#1f2937">2h 17m</tspan>
   </text>
   <line x1="280" y1="74" x2="280" y2="108" stroke="#e5e7eb" stroke-width="1"/>
   <text x="350" y="90" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#374151" text-anchor="middle">
     <tspan font-weight="700" fill="#dc2626">30d</tspan>
-    <tspan x="350" dy="16" font-size="15" font-weight="700" fill="#1f2937">10h 25m</tspan>
+    <tspan x="350" dy="16" font-size="15" font-weight="700" fill="#1f2937">9h 42m</tspan>
   </text>
 </svg>
