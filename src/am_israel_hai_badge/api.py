@@ -26,9 +26,12 @@ def _fetch_json(url: str) -> list[dict] | dict | None:
     """Fetch JSON from URL with retries and exponential backoff."""
     for attempt in range(_MAX_RETRIES):
         try:
-            req = urllib.request.Request(
-                url, headers={"User-Agent": "am-israel-hai-badge/0.1"}
-            )
+            req = urllib.request.Request(url, headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+                "Referer": "https://www.oref.org.il/",
+                "Accept": "application/json, text/plain, */*",
+                "Accept-Language": "he-IL,he;q=0.9,en;q=0.8",
+            })
             with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
                 raw = resp.read()
                 # Official oref API returns UTF-8 with BOM
