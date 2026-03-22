@@ -3,60 +3,85 @@ from __future__ import annotations
 import json
 import logging
 import time
+import urllib.parse
 import urllib.request
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 
 logger = logging.getLogger(__name__)
 
-_BASE_URL = "https://oref-map.org"
+_OREF_HISTORY_URL = (
+    "https://alerts-history.oref.org.il"
+    "/Shared/Ajax/GetAlarmsHistory.aspx"
+)
 _TIMEOUT = 30
 _MAX_RETRIES = 3
 _BACKOFF_BASE = 1  # seconds
-_REQUEST_DELAY = 0.5  # seconds between requests
-
-
-def _fetch_json(url: str) -> list[dict] | dict | None:
-    """Fetch JSON from URL with retries and exponential backoff."""
-    for attempt in range(_MAX_RETRIES):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "am-israel-hai-badge/0.1"})
-            with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-                return data
-        except Exception as exc:
-            wait = _BACKOFF_BASE * (2 ** attempt)
-            logger.warning("Fetch %s attempt %d failed: %s — retrying in %ds", url, attempt + 1, exc, wait)
-            time.sleep(wait)
-    logger.error("Failed to fetch %s after %d attempts", url, _MAX_RETRIES)
-    return None
 
 
 class FetchError(Exception):
     """Raised when an API fetch fails after all retries."""
 
 
-def fetch_day_history(day: date) -> list[dict]:
-    """Fetch full-day archive for a specific date. Raises FetchError on failure."""
-    url = f"{_BASE_URL}/api/day-history?date={day.isoformat()}"
+def _fetch_json(url: str) -> list[dict] | dict | None:
+    """Fetch JSON from URL with retries and exponential backoff."""
+    for attempt in range(_MAX_RETRIES):
+        try:
+            req = urllib.request.Request(
+                url, headers={"User-Agent": "am-israel-hai-badge/0.1"}
+            )
+            with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
+                raw = resp.read()
+                # Official oref API returns UTF-8 with BOM
+                text = raw.decode("utf-8-sig")
+                return json.loads(text)
+        except Exception as exc:
+            wait = _BACKOFF_BASE * (2 ** attempt)
+            logger.warning(
+                "Fetch %s attempt %d failed: %s — retrying in %ds",
+                url, attempt + 1, exc, wait,
+            )
+            time.sleep(wait)
+    logger.error("Failed to fetch %s after %d attempts", url, _MAX_RETRIES)
+    return None
+
+
+def fetch_city_history(city: str) -> list[dict]:
+    """Fetch full alert history for a single city from the official oref API.
+
+    Uses mode=3 with city_0 parameter. Returns up to 3000 records per city,
+    including all signal types (alerts, preparatory, safety).
+    Raises FetchError on failure.
+    """
+    params = urllib.parse.urlencode(
+        {"lang": "he", "mode": "3", "city_0": city},
+        quote_via=urllib.parse.quote,
+    )
+    url = f"{_OREF_HISTORY_URL}?{params}"
     result = _fetch_json(url)
-    time.sleep(_REQUEST_DELAY)
     if result is None:
-        raise FetchError(f"Failed to fetch day-history for {day.isoformat()}")
+        raise FetchError(f"Failed to fetch history for city {city!r}")
     if isinstance(result, list):
         return result
     return []
 
 
-def fetch_history() -> list[dict]:
-    """Fetch recent alerts (last ~1-2 hours). Raises FetchError on failure."""
-    url = f"{_BASE_URL}/api/history"
-    result = _fetch_json(url)
-    time.sleep(_REQUEST_DELAY)
-    if result is None:
-        raise FetchError("Failed to fetch recent history")
-    if isinstance(result, list):
-        return result
-    return []
+def fetch_all_areas_history(area_names: list[str]) -> list[dict]:
+    """Fetch history for all configured area names and merge.
+
+    Each area is fetched separately (mode=3&city_0=NAME), then
+    results are merged and deduplicated by rid.
+    """
+    all_records: dict[int, dict] = {}  # rid -> record
+    for name in area_names:
+        records = fetch_city_history(name)
+        for rec in records:
+            rid = rec.get("rid")
+            if rid is not None:
+                all_records[rid] = rec
+            else:
+                all_records[id(rec)] = rec
+        logger.info("  area %r: %d records", name, len(records))
+    return list(all_records.values())
 
 
 def fetch_github_commit_count(username: str, days: int = 30) -> int:

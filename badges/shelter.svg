@@ -15,7 +15,7 @@
   </text>
   <!-- commit count -->
   <text x="396" y="32" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#6b7280" text-anchor="end">
-    102 commits / 30d
+    103 commits / 30d
   </text>
   <!-- subtitle -->
   <text x="28" y="52" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="500" fill="#6b7280" font-style="italic">
@@ -36,6 +36,6 @@
   <line x1="280" y1="74" x2="280" y2="108" stroke="#e5e7eb" stroke-width="1"/>
   <text x="350" y="90" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#374151" text-anchor="middle">
     <tspan font-weight="700" fill="#dc2626">30d</tspan>
-    <tspan x="350" dy="16" font-size="15" font-weight="700" fill="#1f2937">10h 42m</tspan>
+    <tspan x="350" dy="16" font-size="15" font-weight="700" fill="#1f2937">25h 4m</tspan>
   </text>
 </svg>
