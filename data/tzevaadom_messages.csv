@@ -1,1 +1,131 @@
 time,city,id,category,title
+2026-02-28T08:13:43,חיפה - מערב,193,14,Home Front Command - Follow the Home Front Command guidelines
+2026-02-28T10:06:48,חיפה - מערב,194,14,Home Front Command - Early Warning
+2026-02-28T12:05:33,חיפה - מערב,196,13,Home Front Command - Leaving the protected space
+2026-02-28T14:16:53,חיפה - מערב,201,14,Home Front Command - Early Warning
+2026-02-28T15:23:49,חיפה - מערב,204,14,Home Front Command - Early Warning
+2026-02-28T15:51:53,חיפה - מערב,206,13,Home Front Command - Leaving the protected space
+2026-02-28T17:32:53,חיפה - מערב,215,14,Home Front Command - Early Warning
+2026-02-28T17:53:05,חיפה - מערב,217,14,Home Front Command - Early Warning
+2026-02-28T18:11:39,חיפה - מערב,218,13,Home Front Command - Leaving the protected space
+2026-02-28T18:44:07,חיפה - מערב,220,14,Home Front Command - Early Warning
+2026-02-28T19:01:39,חיפה - מערב,221,13,Home Front Command - Leaving the protected space
+2026-02-28T22:35:25,חיפה - מערב,227,14,Home Front Command - Early Warning
+2026-02-28T23:03:28,חיפה - מערב,228,13,Home Front Command - Leaving the protected space
+2026-03-01T01:32:19,חיפה - מערב,233,14,Home Front Command - Early Warning
+2026-03-01T02:12:02,חיפה - מערב,235,13,Home Front Command - Leaving the protected space
+2026-03-01T08:54:52,חיפה - מערב,244,14,Home Front Command - Early Warning
+2026-03-01T09:15:20,חיפה - מערב,245,13,Home Front Command - Leaving the protected space
+2026-03-01T10:04:52,חיפה - מערב,246,14,Home Front Command - Early Warning
+2026-03-01T10:40:41,חיפה - מערב,248,13,Home Front Command - Leaving the protected space
+2026-03-01T13:24:53,חיפה - מערב,253,14,Home Front Command - Early Warning
+2026-03-01T14:07:37,חיפה - מערב,255,13,Home Front Command - Leaving the protected space
+2026-03-01T16:45:20,חיפה - מערב,257,14,Home Front Command - Early Warning
+2026-03-01T17:03:03,חיפה - מערב,258,13,Home Front Command - Leaving the protected space
+2026-03-01T20:32:50,חיפה - מערב,260,14,Home Front Command - Early Warning
+2026-03-01T20:48:36,חיפה - מערב,261,13,Home Front Command - Leaving the protected space
+2026-03-01T21:08:00,חיפה - מערב,262,14,Home Front Command - Early Warning
+2026-03-01T21:29:06,חיפה - מערב,263,13,Home Front Command - Leaving the protected space
+2026-03-02T01:17:04,חיפה - מערב,272,13,Home Front Command - Incident Ended
+2026-03-02T12:53:10,חיפה - מערב,289,14,Home Front Command - Early Warning
+2026-03-02T13:12:48,חיפה - מערב,291,13,Home Front Command - Incident Ended
+2026-03-03T00:31:10,חיפה - מערב,299,14,Home Front Command - Early Warning
+2026-03-03T00:56:36,חיפה - מערב,302,14,Home Front Command - Early Warning
+2026-03-03T01:17:13,חיפה - מערב,304,13,Home Front Command - Incident Ended
+2026-03-03T14:31:07,חיפה - מערב,324,14,Home Front Command - Early Warning
+2026-03-03T14:56:39,חיפה - מערב,326,13,Home Front Command - Incident Ended
+2026-03-04T00:01:20,חיפה - מערב,341,14,Home Front Command - Early Warning
+2026-03-04T00:21:04,חיפה - מערב,342,13,Home Front Command - Incident Ended
+2026-03-04T00:51:22,חיפה - מערב,343,14,Home Front Command - Early Warning
+2026-03-04T01:05:05,חיפה - מערב,344,13,Home Front Command - Incident Ended
+2026-03-04T05:53:13,חיפה - מערב,351,14,Home Front Command - Early Warning
+2026-03-04T06:01:34,חיפה - מערב,352,13,Home Front Command - Incident Ended
+2026-03-04T16:07:33,חיפה - מערב,376,14,Home Front Command - Early Warning
+2026-03-04T16:26:18,חיפה - מערב,377,13,Home Front Command - Incident Ended
+2026-03-05T20:27:25,חיפה - מערב,420,14,Home Front Command - Early Warning
+2026-03-05T20:50:21,חיפה - מערב,421,13,Home Front Command - Incident Ended
+2026-03-07T04:35:39,חיפה - מערב,473,14,Home Front Command - Early Warning
+2026-03-07T04:51:05,חיפה - מערב,474,13,Home Front Command - Incident Ended
+2026-03-07T19:31:43,חיפה - מערב,501,14,Home Front Command - Early Warning
+2026-03-07T19:46:49,חיפה - מערב,502,13,Home Front Command - Incident Ended
+2026-03-07T20:12:18,חיפה - מערב,503,13,Home Front Command - Incident Ended
+2026-03-08T02:19:25,חיפה - מערב,524,14,Home Front Command - Early Warning
+2026-03-08T02:32:36,חיפה - מערב,525,13,Home Front Command - Incident Ended
+2026-03-08T02:36:53,חיפה - מערב,526,14,Home Front Command - Early Warning
+2026-03-08T02:52:09,חיפה - מערב,527,13,Home Front Command - Incident Ended
+2026-03-09T01:09:27,חיפה - מערב,564,14,Home Front Command - Early Warning
+2026-03-09T01:23:08,חיפה - מערב,565,13,Home Front Command - Incident Ended
+2026-03-09T01:41:34,חיפה - מערב,568,14,Home Front Command - Early Warning
+2026-03-09T01:57:07,חיפה - מערב,570,13,Home Front Command - Incident Ended
+2026-03-09T03:57:01,חיפה - מערב,571,14,Home Front Command - Early Warning
+2026-03-09T04:12:15,חיפה - מערב,572,13,Home Front Command - Incident Ended
+2026-03-09T08:07:26,חיפה - מערב,575,14,Home Front Command - Early Warning
+2026-03-09T08:26:10,חיפה - מערב,576,13,Home Front Command - Incident Ended
+2026-03-09T10:12:32,חיפה - מערב,578,14,Home Front Command - Early Warning
+2026-03-09T10:31:15,חיפה - מערב,579,13,Home Front Command - Incident Ended
+2026-03-09T10:35:15,חיפה - מערב,580,14,Home Front Command - Early Warning
+2026-03-09T10:54:12,חיפה - מערב,582,13,Home Front Command - Incident Ended
+2026-03-09T20:52:13,חיפה - מערב,599,14,Home Front Command - Early Warning
+2026-03-09T21:08:30,חיפה - מערב,600,13,Home Front Command - Incident Ended
+2026-03-09T23:52:55,חיפה - מערב,604,14,Home Front Command - Early Warning
+2026-03-10T00:18:26,חיפה - מערב,605,13,Home Front Command - Incident Ended
+2026-03-10T13:22:40,חיפה - מערב,617,14,Home Front Command - Early Warning
+2026-03-10T13:50:15,חיפה - מערב,618,13,Home Front Command - Incident Ended
+2026-03-10T14:42:25,חיפה - מערב,620,14,Home Front Command - Early Warning
+2026-03-10T15:00:14,חיפה - מערב,622,13,Home Front Command - Incident Ended
+2026-03-11T01:09:01,חיפה - מערב,639,14,Home Front Command - Early Warning
+2026-03-11T01:26:26,חיפה - מערב,641,13,Home Front Command - Incident Ended
+2026-03-11T13:45:51,חיפה - מערב,651,14,Home Front Command - Early Warning
+2026-03-11T14:05:18,חיפה - מערב,652,13,Home Front Command - Incident Ended
+2026-03-11T20:04:23,חיפה - מערב,657,14,Home Front Command - Staying near protected space
+2026-03-11T20:10:18,חיפה - מערב,659,14,Home Front Command - Early Warning
+2026-03-11T20:48:33,חיפה - מערב,661,13,Home Front Command - Leaving the protected space
+2026-03-11T22:17:51,חיפה - מערב,667,13,Home Front Command - Leaving the protected space
+2026-03-11T23:22:40,חיפה - מערב,673,14,Home Front Command - End of stay near protected space
+2026-03-12T04:08:37,חיפה - מערב,680,14,Home Front Command - Early Warning
+2026-03-12T04:26:08,חיפה - מערב,682,13,Home Front Command - Incident Ended
+2026-03-12T06:28:29,חיפה - מערב,683,14,Home Front Command - Early Warning
+2026-03-12T06:45:32,חיפה - מערב,684,13,Home Front Command - Incident Ended
+2026-03-13T01:46:03,חיפה - מערב,710,14,Home Front Command - Early Warning
+2026-03-13T02:04:08,חיפה - מערב,711,13,Home Front Command - Incident Ended
+2026-03-13T02:16:36,חיפה - מערב,712,14,Home Front Command - Early Warning
+2026-03-13T02:32:19,חיפה - מערב,713,14,Home Front Command - Early Warning
+2026-03-13T02:48:33,חיפה - מערב,715,13,Home Front Command - Incident Ended
+2026-03-14T02:21:56,חיפה - מערב,748,14,Home Front Command - Early Warning
+2026-03-14T02:46:00,חיפה - מערב,750,13,Home Front Command - Incident Ended
+2026-03-16T12:12:09,חיפה - מערב,839,14,Home Front Command - Early Warning
+2026-03-16T12:30:43,חיפה - מערב,840,13,Home Front Command - Incident Ended
+2026-03-17T01:01:45,חיפה - מערב,859,14,Home Front Command - Early Warning
+2026-03-17T01:11:17,חיפה - מערב,860,13,Home Front Command - Incident Ended
+2026-03-17T17:43:43,חיפה - מערב,879,14,Home Front Command - Early Warning
+2026-03-17T17:55:16,חיפה - מערב,880,13,Home Front Command - Incident Ended
+2026-03-18T11:04:46,חיפה - מערב,902,14,Home Front Command - Early Warning
+2026-03-18T11:13:09,חיפה - מערב,903,13,Home Front Command - Incident Ended
+2026-03-18T17:49:02,חיפה - מערב,913,14,Home Front Command - Early Warning
+2026-03-18T18:04:08,חיפה - מערב,914,13,Home Front Command - Incident Ended
+2026-03-19T05:19:51,חיפה - מערב,936,14,Home Front Command - Early Warning
+2026-03-19T05:34:10,חיפה - מערב,937,13,Home Front Command - Incident Ended
+2026-03-19T07:31:28,חיפה - מערב,942,14,Home Front Command - Early Warning
+2026-03-19T07:46:12,חיפה - מערב,943,13,Home Front Command - Incident Ended
+2026-03-19T16:44:21,חיפה - מערב,954,14,Home Front Command - Early Warning
+2026-03-19T17:03:44,חיפה - מערב,956,13,Home Front Command - Incident Ended
+2026-03-19T18:45:49,חיפה - מערב,960,14,Home Front Command - Early Warning
+2026-03-19T19:00:07,חיפה - מערב,961,13,Home Front Command - Incident Ended
+2026-03-19T20:50:31,חיפה - מערב,964,14,Home Front Command - Early Warning
+2026-03-19T21:13:03,חיפה - מערב,965,13,Home Front Command - Incident Ended
+2026-03-20T00:12:52,חיפה - מערב,976,14,Home Front Command - Early Warning
+2026-03-20T00:29:09,חיפה - מערב,978,13,Home Front Command - Incident Ended
+2026-03-20T03:00:10,חיפה - מערב,982,13,Home Front Command - Incident Ended
+2026-03-20T13:52:26,חיפה - מערב,1003,14,Home Front Command - Early Warning
+2026-03-20T14:06:01,חיפה - מערב,1005,13,Home Front Command - Incident Ended
+2026-03-21T22:20:38,חיפה - מערב,1069,14,Home Front Command - Early Warning
+2026-03-21T22:38:27,חיפה - מערב,1070,13,Home Front Command - Incident Ended
+2026-03-23T06:52:26,חיפה - מערב,1128,14,Home Front Command - Early Warning
+2026-03-23T07:08:21,חיפה - מערב,1129,13,Home Front Command - Incident Ended
+2026-03-24T00:19:03,חיפה - מערב,1153,14,Home Front Command - Early Warning
+2026-03-24T00:33:32,חיפה - מערב,1154,13,Home Front Command - Incident Ended
+2026-03-25T10:42:39,חיפה - מערב,1217,14,Home Front Command - Early Warning
+2026-03-25T11:09:11,חיפה - מערב,1219,13,Home Front Command - Incident Ended
+2026-03-26T09:08:07,חיפה - מערב,1267,14,Home Front Command - Early Warning
+2026-03-26T09:28:19,חיפה - מערב,1269,13,Home Front Command - Incident Ended
+2026-03-26T21:27:00,חיפה - מערב,1304,13,Home Front Command - Incident Ended
