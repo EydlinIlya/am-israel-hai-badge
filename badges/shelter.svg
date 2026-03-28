@@ -18,10 +18,10 @@
   <text x="406" y="28"
     font-family="'Segoe UI', system-ui, sans-serif"
     font-size="10" font-weight="600" fill="#5b403d" text-anchor="end"
-    letter-spacing="1">79 commits / 30d</text>
+    letter-spacing="1">84 commits / 30d</text>
 
   <!-- Subtitle -->
-  <text x="18" y="44"
+  <text x="18" y="46"
     font-family="'Segoe UI', system-ui, sans-serif"
     font-size="13" font-weight="500" fill="#5b403d">Time spent in bomb shelter in:</text>
 
