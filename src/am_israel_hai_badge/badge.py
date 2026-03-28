@@ -7,57 +7,120 @@ from .time_fmt import format_duration
 _BADGE_DIR = Path(__file__).resolve().parents[2] / "badges"
 
 _SVG_TEMPLATE = """\
-<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120">
-  <defs>
-    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#b91c1c" flood-opacity="0.18"/>
-    </filter>
-  </defs>
-  <!-- outer card -->
-  <rect width="420" height="120" rx="12" fill="#f9fafb" stroke="#dc2626" stroke-width="2.5" filter="url(#shadow)"/>
-  <!-- red accent bar -->
-  <rect x="0" y="0" width="8" height="120" rx="12" fill="#dc2626"/>
-  <rect x="4" y="0" width="4" height="120" fill="#dc2626"/>
-  <!-- title -->
-  <text x="28" y="32" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#dc2626">
-    {shield} Deliver No Matter What
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="180" viewBox="0 0 540 180">
+  <!-- Base background -->
+  <rect width="540" height="180" fill="#f8f9fa"/>
+
+  <!-- Ghost border (outline-variant at low opacity) -->
+  <rect width="540" height="180" fill="none" stroke="#e4beba" stroke-width="1" rx="2" opacity="0.3"/>
+
+  <!-- Left red accent bar -->
+  <rect x="0" y="0" width="4" height="180" fill="#b10726"/>
+
+  <!-- ── HEADER (y=0..56, surface-container-lowest bg) ── -->
+
+  <!-- Micro label -->
+  <text x="18" y="16"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8.5" font-weight="600" fill="#5b403d" letter-spacing="2.5">STATUS PROTOCOL</text>
+
+  <!-- Title: "Deliver" dark + "No Matter What" red -->
+  <text font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="18" font-weight="800">
+    <tspan x="18" y="38" fill="#191c1d">Deliver </tspan><tspan fill="#b10726">No Matter What</tspan>
   </text>
-  <!-- commit count -->
-  <text x="396" y="32" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="600" fill="#6b7280" text-anchor="end">
-    {commits} commits / 30d
-  </text>
-  <!-- subtitle -->
-  <text x="28" y="52" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="11" font-weight="500" fill="#6b7280" font-style="italic">
-    Time spent in bomb shelter
-  </text>
-  <!-- divider -->
-  <line x1="28" y1="64" x2="396" y2="64" stroke="#e5e7eb" stroke-width="1"/>
-  <!-- stats -->
-  <text x="70" y="90" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#374151" text-anchor="middle">
-    <tspan font-weight="700" fill="#dc2626">24h</tspan>
-    <tspan x="70" dy="16" font-size="15" font-weight="700" fill="#1f2937">{h24}</tspan>
-  </text>
-  <line x1="140" y1="74" x2="140" y2="108" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="210" y="90" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#374151" text-anchor="middle">
-    <tspan font-weight="700" fill="#dc2626">7d</tspan>
-    <tspan x="210" dy="16" font-size="15" font-weight="700" fill="#1f2937">{d7}</tspan>
-  </text>
-  <line x1="280" y1="74" x2="280" y2="108" stroke="#e5e7eb" stroke-width="1"/>
-  <text x="350" y="90" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#374151" text-anchor="middle">
-    <tspan font-weight="700" fill="#dc2626">30d</tspan>
-    <tspan x="350" dy="16" font-size="15" font-weight="700" fill="#1f2937">{d30}</tspan>
-  </text>
+
+  <!-- Subtitle italic -->
+  <text x="18" y="51"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="10" font-style="italic" fill="#5b403d">Time spent in bomb shelter</text>
+
+  <!-- LIVE FEED tag -->
+  <rect x="454" y="6" width="80" height="18" fill="#b10726"/>
+  <text x="494" y="18.5"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8.5" font-weight="700" fill="#ffffff"
+    text-anchor="middle" letter-spacing="1.5">LIVE FEED</text>
+
+  <!-- ── COMMITS BLOCK (x=4..180, y=56..180, surface-container bg) ── -->
+  <rect x="4" y="56" width="176" height="124" fill="#edeeef"/>
+
+  <!-- VELOCITY label -->
+  <text x="18" y="74"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8.5" font-weight="600" fill="#5b403d" letter-spacing="2">VELOCITY</text>
+
+  <!-- Commits number -->
+  <text x="18" y="120"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="46" font-weight="800" fill="#191c1d">{commits}</text>
+
+  <!-- COMMITS / 30D sub-label -->
+  <text x="18" y="135"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8.5" font-weight="600" fill="#5b403d" letter-spacing="1.5">COMMITS / 30D</text>
+
+  <!-- Progress bar track -->
+  <rect x="18" y="163" width="150" height="2.5" fill="#d9dadb"/>
+  <!-- Progress bar fill -->
+  <rect x="18" y="163" width="{bar_w}" height="2.5" fill="#191c1d"/>
+
+  <!-- ── SHELTER BLOCK (x=180..540, y=56..180, inverse-surface bg) ── -->
+  <rect x="180" y="56" width="360" height="124" fill="#2e3132"/>
+
+  <!-- Shelter header labels -->
+  <text x="194" y="74"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8.5" font-weight="600" fill="#b10726" letter-spacing="2">SHELTER METRICS</text>
+  <text x="530" y="74"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8.5" font-weight="600" fill="#b10726" text-anchor="end" letter-spacing="1">CRITICAL FOCUS</text>
+
+  <!-- Column dividers (outline-variant at 15% opacity) -->
+  <rect x="300" y="84" width="1" height="62" fill="#e4beba" opacity="0.15"/>
+  <rect x="420" y="84" width="1" height="62" fill="#e4beba" opacity="0.15"/>
+
+  <!-- Col 1: 24H DELTA -->
+  <text x="194" y="97"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8" font-weight="500" fill="#e4beba" opacity="0.7" letter-spacing="1.5">24H DELTA</text>
+  <text x="194" y="126"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="20" font-weight="700" fill="#b10726">{h24}</text>
+
+  <!-- Col 2: 7D AGGREGATE -->
+  <text x="314" y="97"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8" font-weight="500" fill="#e4beba" opacity="0.7" letter-spacing="1.5">7D AGGREGATE</text>
+  <text x="314" y="126"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="20" font-weight="700" fill="#f0f1f2">{d7}</text>
+
+  <!-- Col 3: 30D WINDOW -->
+  <text x="434" y="97"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="8" font-weight="500" fill="#e4beba" opacity="0.7" letter-spacing="1.5">30D WINDOW</text>
+  <text x="434" y="126"
+    font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    font-size="20" font-weight="700" fill="#f0f1f2">{d30}</text>
+
+  <!-- Footer divider and status line -->
+  <rect x="194" y="150" width="330" height="0.5" fill="#e4beba" opacity="0.12"/>
+  <text x="194" y="165"
+    font-family="'Segoe UI', system-ui, sans-serif"
+    font-size="7.5" fill="#e4beba" opacity="0.45" letter-spacing="2">RESILIENCE PROTOCOL: ACTIVE</text>
 </svg>"""
 
 
 def generate_badge(seconds_24h: float, seconds_7d: float, seconds_30d: float, commits_30d: int = 0) -> str:
     """Generate SVG badge content."""
+    bar_w = min(int(commits_30d / 2), 150)
     return _SVG_TEMPLATE.format(
-        shield="\U0001f6e1\ufe0f",  # 🛡️
         h24=format_duration(seconds_24h),
         d7=format_duration(seconds_7d),
         d30=format_duration(seconds_30d),
         commits=commits_30d,
+        bar_w=bar_w,
     )
 
 
