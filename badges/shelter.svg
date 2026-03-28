@@ -48,7 +48,7 @@
     letter-spacing="0.5">Last 7 days</text>
   <text x="214" y="104"
     font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">1h 44m</text>
+    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">1h 42m</text>
 
   <!-- Col 3: last 30 days -->
   <text x="354" y="78"
