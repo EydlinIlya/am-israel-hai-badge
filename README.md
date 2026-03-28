@@ -9,7 +9,7 @@ Designed for your **profile README** (`YOUR_USERNAME/YOUR_USERNAME` repo) — th
 *Data from [tzevaadom.co.il](https://tzevaadom.co.il/) API · City translations from [peppermint-ice/how-the-lion-roars](https://github.com/peppermint-ice/how-the-lion-roars)*
 
 ---
-
+## Quick Start
 ## Finding Your Area Name
 
 Before setting up, find your area name. These correspond to Home Front Command alert zones and work in any language — English, Hebrew, Russian, or Arabic.
@@ -32,7 +32,6 @@ For multiple areas, separate with commas: `Haifa - West, Haifa - Bay`.
 
 ---
 
-## Quick Start
 
 ### Option A: GitHub GUI
 
