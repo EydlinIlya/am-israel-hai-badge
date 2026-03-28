@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
+    inputs:
+      resync:
+        description: "Clear cached data and re-backfill (use after changing area in config.toml)"
+        type: boolean
+        default: false
 permissions:
   contents: write
 jobs:
@@ -13,6 +18,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Clear cache for resync
+        if: ${{ github.event.inputs.resync == 'true' }}
+        run: |
+          printf 'time,city,id,category,title\n' > data/tzevaadom_alerts.csv
+          printf 'time,city,id,category,title\n' > data/tzevaadom_messages.csv
       - run: python -m am_israel_hai_badge.main
         env:
           BADGE_AREAS: ${{ vars.BADGE_AREAS }}

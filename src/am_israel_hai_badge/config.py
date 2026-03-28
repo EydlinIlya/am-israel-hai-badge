@@ -22,8 +22,17 @@ def load_area_names() -> list[str]:
 
 
 def load_github_username() -> str:
-    """Load GitHub username from GITHUB_USERNAME env var or config.toml."""
+    """Load GitHub username from env vars or config.toml.
+
+    Priority:
+    1. GITHUB_USERNAME env var (explicit override, useful for local dev)
+    2. GITHUB_REPOSITORY env var (set automatically in GitHub Actions as owner/repo)
+    3. config.toml [github].username
+    """
     env = os.environ.get("GITHUB_USERNAME", "").strip()
     if env:
         return env
+    repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    if repo and "/" in repo:
+        return repo.split("/")[0]
     return _load_config().get("github", {}).get("username", "")

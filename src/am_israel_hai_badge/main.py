@@ -10,6 +10,7 @@ from .badge import write_badge
 from .config import load_area_names, load_github_username
 from .normalize import normalize_alert
 from .shelter import compute_sessions, shelter_seconds_in_window
+from .stats import write_stats
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -65,6 +66,8 @@ def run() -> None:
 
     path = write_badge(s_24h, s_7d, s_30d, commits_30d)
     logger.info("Badge written to %s", path)
+
+    write_stats(sessions, s_30d)
 
 
 if __name__ == "__main__":
