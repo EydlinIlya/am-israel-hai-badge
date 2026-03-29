@@ -129,6 +129,7 @@
     gap: 1rem;
     align-items: end;
   }
+  .form-group { position: relative; }
   .form-group label {
     display: block;
     font-size: 10px;
@@ -172,6 +173,55 @@
   .btn-create:hover { filter: brightness(1.1); }
   .btn-create:active { transform: scale(0.97); }
 
+  /* ── Autocomplete Dropdown ──────────────────────── */
+  .ac-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+    background: rgba(53, 53, 52, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    padding: 0.375rem;
+  }
+  .ac-dropdown.visible { display: block; }
+  .ac-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    gap: 1rem;
+  }
+  .ac-item:hover { background: rgba(224, 30, 55, 0.1); }
+  .ac-item-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #e5e2e1;
+  }
+  .ac-item-alt {
+    font-size: 0.75rem;
+    color: #9a9b9c;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .ac-empty {
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #9a9b9c;
+  }
+
   /* ── Badges Section ─────────────────────────────── */
   .badges-header {
     display: flex;
@@ -183,42 +233,42 @@
     font-size: 1.25rem;
     font-weight: 700;
   }
-  .badges-count {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #9a9b9c;
-  }
 
   .badge-card {
     background: #1c1b1b;
     border-radius: 12px;
-    padding: 1.5rem 2rem;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    padding: 2rem;
+    margin-bottom: 1.25rem;
     transition: background 0.2s;
   }
   .badge-card:hover { background: #201f1f; }
 
   .badge-card-preview {
-    flex-shrink: 0;
+    margin-bottom: 1.25rem;
   }
   .badge-card-preview img {
-    height: 60px;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
     border-radius: 4px;
   }
 
-  .badge-card-info {
-    flex: 1;
-    min-width: 0;
+  .badge-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
   .badge-card-area {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .embed-group {
+    flex: 1;
+    min-width: 200px;
   }
   .embed-label {
     font-size: 10px;
@@ -226,7 +276,7 @@
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: #9a9b9c;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
   }
   .embed-row {
     display: flex;
@@ -236,7 +286,7 @@
   .embed-code {
     flex: 1;
     background: #0e0e0e;
-    padding: 0.5rem 0.75rem;
+    padding: 0.6rem 0.75rem;
     border-radius: 6px;
     font-family: 'Cascadia Code', 'Fira Code', monospace;
     font-size: 0.7rem;
@@ -250,12 +300,9 @@
     width: 100%;
   }
 
-  .badge-card-actions {
-    flex-shrink: 0;
-  }
-  .btn-delete {
-    width: 40px;
-    height: 40px;
+  .btn-icon {
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -265,15 +312,24 @@
     cursor: pointer;
     transition: all 0.2s;
     color: #9a9b9c;
+    flex-shrink: 0;
+  }
+  .btn-icon:hover {
+    background: #353534;
+    color: #e5e2e1;
+  }
+  .btn-icon.copied {
+    background: rgba(224, 30, 55, 0.15);
+    color: #e01e37;
+  }
+  .btn-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
   }
   .btn-delete:hover {
     background: rgba(224, 30, 55, 0.1);
     color: #e01e37;
-  }
-  .btn-delete svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
   }
 
   .empty-state {
@@ -296,20 +352,21 @@
     padding-top: 2rem;
   }
 
+  /* ── Scrollbar ──────────────────────────────────── */
+  .ac-dropdown::-webkit-scrollbar { width: 6px; }
+  .ac-dropdown::-webkit-scrollbar-track { background: transparent; }
+  .ac-dropdown::-webkit-scrollbar-thumb { background: #353534; border-radius: 3px; }
+
   /* ── Mobile ─────────────────────────────────────── */
   @media (max-width: 640px) {
     .create-form {
       grid-template-columns: 1fr;
     }
-    .badge-card {
+    .badge-card-meta {
       flex-direction: column;
       align-items: flex-start;
-      gap: 1rem;
-      padding: 1.5rem;
     }
-    .badge-card-actions {
-      align-self: flex-end;
-    }
+    .embed-group { width: 100%; }
   }
 </style>
 </head>
@@ -332,8 +389,8 @@
 <!-- ── Main ────────────────────────────────────────── -->
 <main class="content">
 
-  <h1 class="page-title">DELIVER <span>NO MATTER WHAT</span></h1>
-  <p class="page-subtitle">Generate real-time status badges for your service areas and embed them directly into your documentation.</p>
+  <h1 class="page-title">Your <span>Badges</span></h1>
+  <p class="page-subtitle">Pick your area and get a unique badge URL to embed in your profile README or anywhere else.</p>
 
   <!-- Create New Badge -->
   <div class="create-section">
@@ -343,24 +400,22 @@
         <span class="section-title-icon">+</span>
         Create New Badge
       </h2>
-      <form method="post" action="/api/badges" class="create-form">
-        <div class="form-group">
-          <label for="areas">Area Name / Location</label>
-          <input type="text" id="areas" name="areas" list="area-list"
-                 placeholder="Search for area (e.g., Haifa, Tel Aviv...)"
+      <form method="post" action="/api/badges" class="create-form" id="badge-form">
+        <div class="form-group" id="area-group">
+          <label for="areas">Area name (any language)</label>
+          <input type="text" id="areas" name="areas"
+                 placeholder="Start typing: Haifa, חיפה, Хайфа..."
                  required autocomplete="off"/>
-          <datalist id="area-list">
-            {{area_options}}
-          </datalist>
+          <div class="ac-dropdown" id="ac-dropdown"></div>
         </div>
-        <button type="submit" class="btn-create">Generate Badge</button>
+        <button type="submit" class="btn-create">Create</button>
       </form>
     </div>
   </div>
 
   <!-- Your Badges -->
   <div class="badges-header">
-    <h2>Your Active Badges</h2>
+    <h2>Active Badges</h2>
   </div>
 
   {{badge_rows}}
@@ -370,6 +425,89 @@
   </div>
 
 </main>
+
+<script>
+(function() {
+  // ── Area Autocomplete ──────────────────────────────
+  const input = document.getElementById('areas');
+  const dropdown = document.getElementById('ac-dropdown');
+  let areas = [];
+  let debounceTimer;
+
+  fetch('/api/areas')
+    .then(r => r.json())
+    .then(data => { areas = data; })
+    .catch(() => {});
+
+  function renderDropdown(matches) {
+    if (!matches.length) {
+      dropdown.innerHTML = '<div class="ac-empty">No areas found</div>';
+      dropdown.classList.add('visible');
+      return;
+    }
+    dropdown.innerHTML = matches.slice(0, 20).map(a => {
+      const alts = ['en','ru','ar']
+        .filter(l => a[l])
+        .map(l => a[l])
+        .join(' · ');
+      return `<div class="ac-item" data-value="${a.he}">
+        <span class="ac-item-name">${a.he}${a.en ? ' — ' + a.en : ''}</span>
+        ${alts ? '<span class="ac-item-alt">' + alts + '</span>' : ''}
+      </div>`;
+    }).join('');
+    dropdown.classList.add('visible');
+  }
+
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    const q = this.value.trim().toLowerCase();
+    if (q.length < 2) {
+      dropdown.classList.remove('visible');
+      return;
+    }
+    debounceTimer = setTimeout(() => {
+      const matches = areas.filter(a => {
+        return a.he.toLowerCase().includes(q)
+          || (a.en && a.en.toLowerCase().includes(q))
+          || (a.ru && a.ru.toLowerCase().includes(q))
+          || (a.ar && a.ar.toLowerCase().includes(q));
+      });
+      renderDropdown(matches);
+    }, 150);
+  });
+
+  dropdown.addEventListener('click', function(e) {
+    const item = e.target.closest('.ac-item');
+    if (item) {
+      input.value = item.dataset.value;
+      dropdown.classList.remove('visible');
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#area-group')) {
+      dropdown.classList.remove('visible');
+    }
+  });
+
+  // ── Copy Buttons ───────────────────────────────────
+  document.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const input = this.closest('.embed-row').querySelector('.embed-code');
+      navigator.clipboard.writeText(input.value).then(() => {
+        this.classList.add('copied');
+        this.querySelector('.icon-copy').style.display = 'none';
+        this.querySelector('.icon-check').style.display = 'block';
+        setTimeout(() => {
+          this.classList.remove('copied');
+          this.querySelector('.icon-copy').style.display = 'block';
+          this.querySelector('.icon-check').style.display = 'none';
+        }, 2000);
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
