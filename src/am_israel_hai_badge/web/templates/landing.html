@@ -3,124 +3,350 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Shelter Badge</title>
+<title>Deliver No Matter What</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #191c1d;
-    color: #f0f1f2;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #131313;
+    color: #e5e2e1;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* ── Layout ─────────────────────────────────────── */
+  .hero {
+    flex: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 3rem 1.5rem;
   }
-  .container { max-width: 640px; text-align: center; }
-  .accent-bar {
-    width: 4px;
-    height: 48px;
-    background: #b10726;
-    margin: 0 auto 1.5rem;
+  .hero-grid {
+    max-width: 960px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 4rem;
+    align-items: center;
   }
-  h1 {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 0.25rem;
-  }
-  h1 span { color: #b10726; }
-  .subtitle {
-    font-size: 1rem;
-    color: #9a9b9c;
+
+  /* ── Left: Editorial Branding ───────────────────── */
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     margin-bottom: 2rem;
   }
+  .brand-icon {
+    width: 48px;
+    height: 48px;
+    background: #e01e37;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(224, 30, 55, 0.2);
+  }
+  .brand-icon svg { width: 28px; height: 28px; fill: #fff; }
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+  }
+  .hero-title span { color: #e01e37; }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #c5c7c8;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+
+  /* Badge preview */
   .badge-preview {
-    background: #2e3132;
-    border-radius: 4px;
+    background: #1c1b1b;
+    border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2rem;
   }
-  .badge-preview img, .badge-preview svg {
+  .badge-preview svg {
     width: 100%;
-    max-width: 600px;
+    max-width: 560px;
     height: auto;
+    display: block;
   }
-  .description {
-    font-size: 0.9rem;
-    color: #9a9b9c;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    text-align: left;
+
+  /* Feature cards */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
-  .btn-login {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #f0f1f2;
-    color: #191c1d;
-    font-size: 1rem;
+  .feature-card {
+    background: #1c1b1b;
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .feature-label {
+    font-size: 10px;
     font-weight: 700;
-    padding: 0.75rem 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #e01e37;
+    margin-bottom: 0.5rem;
+  }
+  .feature-text {
+    font-size: 0.85rem;
+    color: #c5c7c8;
+    line-height: 1.5;
+  }
+
+  /* ── Right: Glass Login Card ────────────────────── */
+  .login-card {
+    background: rgba(53, 53, 52, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+  .login-glow {
+    position: absolute;
+    top: -96px;
+    right: -96px;
+    width: 192px;
+    height: 192px;
+    background: rgba(224, 30, 55, 0.1);
+    border-radius: 50%;
+    filter: blur(48px);
+  }
+  .login-content {
+    position: relative;
+    z-index: 1;
+  }
+  .login-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .login-desc {
+    font-size: 0.875rem;
+    color: #c5c7c8;
+    margin-bottom: 2rem;
+  }
+
+  .btn-github {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: #393939;
+    color: #e5e2e1;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 1rem 1.5rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
     text-decoration: none;
-    transition: background 0.15s;
+    transition: background 0.2s;
   }
-  .btn-login:hover { background: #e4beba; }
-  .btn-login svg { width: 20px; height: 20px; }
-  .footer {
+  .btn-github:hover { background: #353534; }
+  .btn-github:active { transform: scale(0.98); }
+  .btn-github svg { width: 24px; height: 24px; fill: currentColor; }
+
+  .login-note {
+    font-size: 10px;
+    color: #c5c7c8;
+    text-align: center;
+    line-height: 1.6;
     margin-top: 2rem;
-    font-size: 0.75rem;
-    color: #5b5c5d;
   }
-  .footer a { color: #b10726; text-decoration: none; }
+  .login-note strong { color: #e5e2e1; font-weight: 600; }
+
+  /* ── Footer ─────────────────────────────────────── */
+  footer {
+    padding: 2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0e0e0e;
+  }
+  .footer-copy {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #9a9b9c;
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+  .footer-links a {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #9a9b9c;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: #e01e37; }
+
+  /* ── Background Decorative Blurs ────────────────── */
+  .bg-blur {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .bg-blur-red {
+    position: absolute;
+    top: 10%; left: 5%;
+    width: 40vw; height: 40vw;
+    background: rgba(224, 30, 55, 0.04);
+    border-radius: 50%;
+    filter: blur(120px);
+  }
+  .bg-blur-gray {
+    position: absolute;
+    bottom: 10%; right: 5%;
+    width: 30vw; height: 30vw;
+    background: rgba(57, 57, 57, 0.1);
+    border-radius: 50%;
+    filter: blur(100px);
+  }
+
+  /* ── Mobile responsive ──────────────────────────── */
+  @media (max-width: 768px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      text-align: center;
+    }
+    .hero-subtitle { margin-left: auto; margin-right: auto; }
+    .brand-mark { justify-content: center; }
+    .features { grid-template-columns: 1fr; }
+    .login-card { padding: 2rem; }
+    footer {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="accent-bar"></div>
-  <h1>Deliver <span>No Matter What</span></h1>
-  <p class="subtitle">Embeddable shelter time badge for your GitHub profile</p>
 
-  <div class="badge-preview">
-    <svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120">
-      <rect width="420" height="120" fill="#f8f9fa"/>
-      <rect width="420" height="120" fill="none" stroke="#e4beba" stroke-width="1" rx="2" opacity="0.3"/>
-      <rect x="0" y="0" width="4" height="120" fill="#b10726"/>
-      <text font-family="'Segoe UI', sans-serif" font-size="16" font-weight="800">
-        <tspan x="18" y="28" fill="#191c1d">Deliver </tspan><tspan fill="#b10726">No Matter What</tspan>
-      </text>
-      <text x="406" y="28" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#5b403d" text-anchor="end" letter-spacing="1">128 contributions / 30d</text>
-      <text x="18" y="46" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#5b403d">Time spent in bomb shelter in:</text>
-      <rect x="4" y="54" width="416" height="66" fill="#2e3132"/>
-      <rect x="144" y="62" width="1" height="50" fill="#e4beba" opacity="0.15"/>
-      <rect x="284" y="62" width="1" height="50" fill="#e4beba" opacity="0.15"/>
-      <text x="74" y="78" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#e4beba" text-anchor="middle" letter-spacing="0.5">Last 24 hours</text>
-      <text x="74" y="104" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">0m</text>
-      <text x="214" y="78" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#e4beba" text-anchor="middle" letter-spacing="0.5">Last 7 days</text>
-      <text x="214" y="104" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">2h</text>
-      <text x="354" y="78" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#e4beba" text-anchor="middle" letter-spacing="0.5">Last 30 days</text>
-      <text x="354" y="104" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">23h 8m</text>
-    </svg>
-  </div>
-
-  <div class="description">
-    <p>Track how much time you spend in a bomb shelter based on real-time
-    Home Front Command alerts. Sign in with GitHub, pick your area, and get
-    a unique badge URL to embed in your profile README or anywhere else.</p>
-  </div>
-
-  <a href="/auth/login" class="btn-login">
-    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-    Sign in with GitHub
-  </a>
-
-  <p class="footer">
-    Data from <a href="https://tzevaadom.co.il">tzevaadom.co.il</a> ·
-    <a href="https://github.com/EydlinIlya/deliver-no-matter-what">Source</a>
-  </p>
+<div class="bg-blur">
+  <div class="bg-blur-red"></div>
+  <div class="bg-blur-gray"></div>
 </div>
+
+<main class="hero">
+<div class="hero-grid">
+  <!-- Left: Editorial Branding -->
+  <div>
+    <div class="brand-mark">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+      </div>
+      <span class="brand-name">ShelterStatus</span>
+    </div>
+
+    <h1 class="hero-title">
+      Deliver<br/><span>No Matter What.</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Precision tracking for remote teams in volatile regions.
+      Automatically document shelter time based on real-time
+      Home Front Command alerts.
+    </p>
+
+    <div class="badge-preview">
+      <svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120">
+        <rect width="420" height="120" fill="#f8f9fa"/>
+        <rect width="420" height="120" fill="none" stroke="#e4beba" stroke-width="1" rx="2" opacity="0.3"/>
+        <rect x="0" y="0" width="4" height="120" fill="#b10726"/>
+        <text font-family="'Inter', 'Segoe UI', sans-serif" font-size="16" font-weight="800">
+          <tspan x="18" y="28" fill="#191c1d">Deliver </tspan><tspan fill="#b10726">No Matter What</tspan>
+        </text>
+        <text x="406" y="28" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#5b403d" text-anchor="end" letter-spacing="1">128 contributions / 30d</text>
+        <text x="18" y="46" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="#5b403d">Time spent in bomb shelter in:</text>
+        <rect x="4" y="54" width="416" height="66" fill="#2e3132"/>
+        <rect x="144" y="62" width="1" height="50" fill="#e4beba" opacity="0.15"/>
+        <rect x="284" y="62" width="1" height="50" fill="#e4beba" opacity="0.15"/>
+        <text x="74" y="78" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#e4beba" text-anchor="middle" letter-spacing="0.5">Last 24 hours</text>
+        <text x="74" y="104" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">0m</text>
+        <text x="214" y="78" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#e4beba" text-anchor="middle" letter-spacing="0.5">Last 7 days</text>
+        <text x="214" y="104" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">2h</text>
+        <text x="354" y="78" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#e4beba" text-anchor="middle" letter-spacing="0.5">Last 30 days</text>
+        <text x="354" y="104" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">23h 8m</text>
+      </svg>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-label">Data Integrity</div>
+        <p class="feature-text">Synced directly with tzevaadom.co.il for millisecond accuracy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-label">Always Current</div>
+        <p class="feature-text">Badge regenerates on every view. Embed once, stays up to date forever.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Glass Login Card -->
+  <div class="login-card">
+    <div class="login-glow"></div>
+    <div class="login-content">
+      <h2 class="login-title">Secure Authentication</h2>
+      <p class="login-desc">Sign in to generate your personal shelter time badge.</p>
+
+      <a href="/auth/login" class="btn-github">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0024 12.297c0-6.627-5.373-12-12-12z"/></svg>
+        Continue with GitHub
+      </a>
+
+      <p class="login-note">
+        By signing in, your activity logs are cross-referenced with official
+        <strong>Home Front Command</strong> alert streams for operational verification.
+      </p>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <span class="footer-copy">Data from tzevaadom.co.il</span>
+  <div class="footer-links">
+    <a href="https://github.com/EydlinIlya/deliver-no-matter-what">GitHub</a>
+  </div>
+</footer>
+
 </body>
 </html>

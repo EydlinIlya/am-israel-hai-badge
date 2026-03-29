@@ -3,188 +3,373 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dashboard — Shelter Badge</title>
+<title>Dashboard — ShelterStatus</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #191c1d;
-    color: #f0f1f2;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #131313;
+    color: #e5e2e1;
     min-height: 100vh;
-    padding: 2rem;
   }
-  .header {
+
+  /* ── Header ─────────────────────────────────────── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    max-width: 800px;
-    margin: 0 auto 2rem;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: #131313;
   }
-  .user-info {
+  .topbar-brand {
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+  .topbar-user {
     display: flex;
     align-items: center;
     gap: 0.75rem;
   }
-  .user-info img {
-    width: 32px;
-    height: 32px;
+  .topbar-user img {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
   }
-  .user-info span { font-weight: 600; }
-  .btn-logout {
-    background: none;
-    border: 1px solid #5b5c5d;
-    color: #9a9b9c;
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
+  .topbar-name {
+    font-size: 0.8rem;
+    font-weight: 700;
   }
-  .btn-logout:hover { border-color: #f0f1f2; color: #f0f1f2; }
-  .content { max-width: 800px; margin: 0 auto; }
-  h2 {
+  .btn-logout {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #e01e37;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .btn-logout:hover { color: #ffb3b1; }
+
+  /* ── Main Content ───────────────────────────────── */
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .page-title span { color: #e01e37; }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: #c5c7c8;
+    margin-bottom: 3rem;
+    max-width: 600px;
+  }
+
+  /* ── Create Badge Section ───────────────────────── */
+  .create-section {
+    background: #1c1b1b;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .create-glow {
+    position: absolute;
+    top: -64px;
+    right: -64px;
+    width: 192px;
+    height: 192px;
+    background: rgba(224, 30, 55, 0.05);
+    border-radius: 50%;
+    filter: blur(48px);
+  }
+  .create-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .section-title {
     font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 1rem;
-    color: #e4beba;
-  }
-  .section {
-    background: #2e3132;
-    border-radius: 4px;
-    padding: 1.5rem;
     margin-bottom: 1.5rem;
-  }
-  table { width: 100%; border-collapse: collapse; }
-  th {
-    text-align: left;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #9a9b9c;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid #3e4142;
-  }
-  td {
-    padding: 0.75rem;
-    border-bottom: 1px solid #3e4142;
-    vertical-align: middle;
-    font-size: 0.9rem;
-  }
-  tr:last-child td { border-bottom: none; }
-  .embed-input {
-    width: 100%;
-    background: #191c1d;
-    border: 1px solid #3e4142;
-    color: #e4beba;
-    padding: 0.4rem 0.5rem;
-    border-radius: 3px;
-    font-family: 'Cascadia Code', 'Fira Code', monospace;
-    font-size: 0.75rem;
-    cursor: text;
-  }
-  .btn-delete {
-    background: none;
-    border: 1px solid #b10726;
-    color: #b10726;
-    padding: 0.3rem 0.75rem;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.8rem;
-  }
-  .btn-delete:hover { background: #b10726; color: #fff; }
-  .create-form {
     display: flex;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-title-icon {
+    width: 24px;
+    height: 24px;
+    background: #e01e37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .create-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
     align-items: end;
   }
-  .form-group { flex: 1; }
   .form-group label {
     display: block;
-    font-size: 0.75rem;
-    color: #9a9b9c;
+    font-size: 10px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.4rem;
+    letter-spacing: 0.15em;
+    color: #9a9b9c;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
   }
   .form-group input {
     width: 100%;
-    background: #191c1d;
-    border: 1px solid #3e4142;
-    color: #f0f1f2;
-    padding: 0.5rem 0.75rem;
-    border-radius: 3px;
-    font-size: 0.9rem;
+    background: #0e0e0e;
+    border: none;
+    color: #e5e2e1;
+    padding: 1rem 1rem;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: box-shadow 0.2s;
   }
   .form-group input:focus {
-    outline: none;
-    border-color: #b10726;
+    box-shadow: 0 0 0 2px rgba(224, 30, 55, 0.4);
   }
+  .form-group input::placeholder { color: rgba(197, 199, 200, 0.3); }
+
   .btn-create {
-    background: #b10726;
+    background: #e01e37;
     color: #fff;
     border: none;
-    padding: 0.5rem 1.5rem;
-    border-radius: 3px;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-family: inherit;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     cursor: pointer;
     white-space: nowrap;
+    transition: all 0.2s;
   }
-  .btn-create:hover { background: #8e0520; }
+  .btn-create:hover { filter: brightness(1.1); }
+  .btn-create:active { transform: scale(0.97); }
+
+  /* ── Badges Section ─────────────────────────────── */
+  .badges-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+  }
+  .badges-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .badges-count {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #9a9b9c;
+  }
+
+  .badge-card {
+    background: #1c1b1b;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: background 0.2s;
+  }
+  .badge-card:hover { background: #201f1f; }
+
+  .badge-card-preview {
+    flex-shrink: 0;
+  }
+  .badge-card-preview img {
+    height: 60px;
+    border-radius: 4px;
+  }
+
+  .badge-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .badge-card-area {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .embed-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #9a9b9c;
+    margin-bottom: 0.25rem;
+  }
+  .embed-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .embed-code {
+    flex: 1;
+    background: #0e0e0e;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: #ffb3b1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: text;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+
+  .badge-card-actions {
+    flex-shrink: 0;
+  }
+  .btn-delete {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2a2a2a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #9a9b9c;
+  }
+  .btn-delete:hover {
+    background: rgba(224, 30, 55, 0.1);
+    color: #e01e37;
+  }
+  .btn-delete svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .empty-state {
+    background: #1c1b1b;
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    color: #9a9b9c;
+    font-size: 0.95rem;
+  }
+
+  /* ── Meta ────────────────────────────────────────── */
   .meta {
-    font-size: 0.75rem;
-    color: #5b5c5d;
-    margin-top: 1rem;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #9a9b9c;
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+
+  /* ── Mobile ─────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .create-form {
+      grid-template-columns: 1fr;
+    }
+    .badge-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+    .badge-card-actions {
+      align-self: flex-end;
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="user-info">
+<!-- ── TopBar ──────────────────────────────────────── -->
+<header class="topbar">
+  <span class="topbar-brand">ShelterStatus</span>
+  <div class="topbar-user">
+    <div style="text-align: right;">
+      <div class="topbar-name">{{username}}</div>
+      <form method="post" action="/auth/logout" style="display:inline;">
+        <button type="submit" class="btn-logout">Log out</button>
+      </form>
+    </div>
     <img src="{{avatar}}" alt="avatar"/>
-    <span>{{username}}</span>
   </div>
-  <form method="post" action="/auth/logout">
-    <button type="submit" class="btn-logout">Log out</button>
-  </form>
-</div>
+</header>
 
-<div class="content">
-  <h2>Your Badges</h2>
-  <div class="section">
-    <table>
-      <thead>
-        <tr>
-          <th>Preview</th>
-          <th>Area</th>
-          <th>Embed Code</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{badge_rows}}
-      </tbody>
-    </table>
-  </div>
+<!-- ── Main ────────────────────────────────────────── -->
+<main class="content">
 
-  <h2>Create New Badge</h2>
-  <div class="section">
-    <form method="post" action="/api/badges" class="create-form">
-      <div class="form-group">
-        <label for="areas">Area name (any language, comma-separated)</label>
-        <input type="text" id="areas" name="areas" list="area-list" placeholder="Start typing area name..." required autocomplete="off"/>
-        <datalist id="area-list">
-          {{area_options}}
-        </datalist>
-      </div>
-      <button type="submit" class="btn-create">Create</button>
-    </form>
+  <h1 class="page-title">DELIVER <span>NO MATTER WHAT</span></h1>
+  <p class="page-subtitle">Generate real-time status badges for your service areas and embed them directly into your documentation.</p>
+
+  <!-- Create New Badge -->
+  <div class="create-section">
+    <div class="create-glow"></div>
+    <div class="create-inner">
+      <h2 class="section-title">
+        <span class="section-title-icon">+</span>
+        Create New Badge
+      </h2>
+      <form method="post" action="/api/badges" class="create-form">
+        <div class="form-group">
+          <label for="areas">Area Name / Location</label>
+          <input type="text" id="areas" name="areas" list="area-list"
+                 placeholder="Search for area (e.g., Haifa, Tel Aviv...)"
+                 required autocomplete="off"/>
+          <datalist id="area-list">
+            {{area_options}}
+          </datalist>
+        </div>
+        <button type="submit" class="btn-create">Generate Badge</button>
+      </form>
+    </div>
   </div>
 
-  <p class="meta">Cache: {{record_count}} records · Last refresh: {{last_refresh}}</p>
-</div>
+  <!-- Your Badges -->
+  <div class="badges-header">
+    <h2>Your Active Badges</h2>
+  </div>
+
+  {{badge_rows}}
+
+  <div class="meta">
+    Cache: {{record_count}} records · Last refresh: {{last_refresh}}
+  </div>
+
+</main>
 
 </body>
 </html>

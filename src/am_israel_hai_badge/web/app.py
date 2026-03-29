@@ -173,17 +173,26 @@ async def dashboard(request: Request):
         url = f"{base}/badge/{b['token']}.svg"
         embed = f"![Time in Shelter]({url})"
         badge_rows += f"""
-        <tr>
-            <td><img src="/badge/{b['token']}.svg" alt="badge" height="60"/></td>
-            <td>{areas}</td>
-            <td><input type="text" value="{embed}" readonly onclick="this.select()" class="embed-input"/></td>
-            <td>
-                <form method="post" action="/api/badges/{b['token']}/delete"
-                      onsubmit="return confirm('Delete this badge?')">
-                    <button type="submit" class="btn-delete">Delete</button>
-                </form>
-            </td>
-        </tr>"""
+    <div class="badge-card">
+      <div class="badge-card-preview">
+        <img src="/badge/{b['token']}.svg" alt="badge" height="60"/>
+      </div>
+      <div class="badge-card-info">
+        <div class="badge-card-area">{areas}</div>
+        <div class="embed-label">Embed Code</div>
+        <div class="embed-row">
+          <input type="text" value="{embed}" readonly onclick="this.select()" class="embed-code"/>
+        </div>
+      </div>
+      <div class="badge-card-actions">
+        <form method="post" action="/api/badges/{b['token']}/delete"
+              onsubmit="return confirm('Delete this badge?')">
+          <button type="submit" class="btn-delete">
+            <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>"""
 
     # Build datalist options for area autocomplete
     area_opts = ""
@@ -199,7 +208,7 @@ async def dashboard(request: Request):
         "dashboard.html",
         username=user["login"],
         avatar=user.get("avatar", ""),
-        badge_rows=badge_rows or "<tr><td colspan='4'>No badges yet. Create one below.</td></tr>",
+        badge_rows=badge_rows or '<div class="empty-state">No badges yet. Create one above.</div>',
         area_options=area_opts,
         record_count=alert_cache.record_count,
         last_refresh=str(alert_cache.last_refresh or "loading..."),
