@@ -545,8 +545,13 @@ def fetch_all_areas_history(area_names: list[str]) -> list[dict]:
     return all_records
 
 
-def fetch_github_commit_count(username: str, days: int = 30, token: str = "") -> int:
-    """Count commits for a GitHub user in the last N days via GraphQL API."""
+def fetch_github_contribution_count(username: str, days: int = 30, token: str = "") -> int:
+    """Count all GitHub contributions (commits, PRs, issues, reviews) in last N days.
+
+    Uses ``contributionCalendar.totalContributions`` — the same number as the
+    green squares on a GitHub profile.  Includes private activity when querying
+    with the user's own OAuth token.
+    """
     if not username:
         return 0
 
@@ -560,7 +565,7 @@ def fetch_github_commit_count(username: str, days: int = 30, token: str = "") ->
                     ["gh", "auth", "token"], stderr=subprocess.DEVNULL
                 ).decode().strip()
             except Exception:
-                logger.warning("No GitHub token available, skipping commit count")
+                logger.warning("No GitHub token available, skipping contribution count")
                 return 0
 
     now = datetime.now(tz=timezone.utc)
@@ -570,8 +575,7 @@ def fetch_github_commit_count(username: str, days: int = 30, token: str = "") ->
     query = json.dumps({"query": (
         '{ user(login: "' + username + '") {'
         '  contributionsCollection(from: "' + from_date + '", to: "' + to_date + '") {'
-        "    totalCommitContributions"
-        "    restrictedContributionsCount"
+        "    contributionCalendar { totalContributions }"
         "  }"
         "} }"
     )}).encode()
@@ -589,10 +593,14 @@ def fetch_github_commit_count(username: str, days: int = 30, token: str = "") ->
         with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         cc = data["data"]["user"]["contributionsCollection"]
-        return cc["totalCommitContributions"] + cc["restrictedContributionsCount"]
+        return cc["contributionCalendar"]["totalContributions"]
     except Exception as exc:
         logger.warning("GitHub GraphQL query failed: %s", exc)
         return 0
+
+
+# Keep old name as alias for backwards compatibility with CLI workflow
+fetch_github_commit_count = fetch_github_contribution_count
 
 
 # --------------------------------------------------------------------------- #

@@ -27,7 +27,7 @@ _SVG_TEMPLATE = """\
   <text x="406" y="28"
     font-family="'Segoe UI', system-ui, sans-serif"
     font-size="10" font-weight="600" fill="#5b403d" text-anchor="end"
-    letter-spacing="1">{commits} commits / 30d</text>
+    letter-spacing="1">{commits} contributions / 30d</text>
 
   <!-- Subtitle -->
   <text x="18" y="46"
