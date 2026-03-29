@@ -174,7 +174,10 @@
     <form method="post" action="/api/badges" class="create-form">
       <div class="form-group">
         <label for="areas">Area name (any language, comma-separated)</label>
-        <input type="text" id="areas" name="areas" placeholder="e.g. Haifa - West" required/>
+        <input type="text" id="areas" name="areas" list="area-list" placeholder="Start typing area name..." required autocomplete="off"/>
+        <datalist id="area-list">
+          {{area_options}}
+        </datalist>
       </div>
       <button type="submit" class="btn-create">Create</button>
     </form>

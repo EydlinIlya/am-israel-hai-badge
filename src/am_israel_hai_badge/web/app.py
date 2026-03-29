@@ -10,7 +10,7 @@ from pathlib import Path
 from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
-from ..api import fetch_github_commit_count, resolve_area_names
+from ..api import fetch_github_commit_count, resolve_area_names, _fetch_cities_data
 from ..badge import generate_badge
 from .auth import (
     _COOKIE_NAME,
@@ -93,7 +93,7 @@ async def serve_badge(token: str):
     s_24h, s_7d, s_30d = alert_cache.get_badge_data(area_names)
 
     commits = 0
-    if badge["show_commits"] and badge.get("github_login"):
+    if badge.get("github_login"):
         try:
             commits = fetch_github_commit_count(badge["github_login"])
         except Exception:
@@ -182,11 +182,22 @@ async def dashboard(request: Request):
             </td>
         </tr>"""
 
+    # Build datalist options for area autocomplete
+    area_opts = ""
+    for area in _get_area_options():
+        labels = [area["he"]]
+        for lang in ("en", "ru", "ar"):
+            if lang in area:
+                labels.append(area[lang])
+        display = " / ".join(labels)
+        area_opts += f'<option value="{area["he"]}" label="{display}"></option>\n'
+
     return _render(
         "dashboard.html",
         username=user["login"],
         avatar=user.get("avatar", ""),
         badge_rows=badge_rows or "<tr><td colspan='4'>No badges yet. Create one below.</td></tr>",
+        area_options=area_opts,
         record_count=alert_cache.record_count,
         last_refresh=str(alert_cache.last_refresh or "loading..."),
     )
@@ -220,6 +231,33 @@ async def delete_badge(token: str, request: Request):
         raise HTTPException(401)
     db.delete_badge(token, user["uid"])
     return RedirectResponse("/dashboard", status_code=303)
+
+
+# ── Areas API ─────────────────────────────────────────────────────────
+
+def _get_area_options() -> list[dict]:
+    """Return area list with all language variants for autocomplete."""
+    try:
+        cities = _fetch_cities_data()
+    except Exception:
+        return []
+    areas: list[dict] = []
+    for he_name, info in cities.items():
+        if not isinstance(info, dict):
+            continue
+        entry = {"he": he_name}
+        for lang in ("en", "ru", "ar"):
+            val = info.get(lang, "")
+            if val:
+                entry[lang] = val
+        areas.append(entry)
+    areas.sort(key=lambda a: a.get("en", a["he"]))
+    return areas
+
+
+@app.get("/api/areas")
+async def list_areas():
+    return _get_area_options()
 
 
 # ── Landing page ──────────────────────────────────────────────────────
