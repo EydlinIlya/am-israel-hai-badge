@@ -18,7 +18,7 @@
   <text x="406" y="28"
     font-family="'Segoe UI', system-ui, sans-serif"
     font-size="10" font-weight="600" fill="#5b403d" text-anchor="end"
-    letter-spacing="1">110 commits / 30d</text>
+    letter-spacing="1">115 commits / 30d</text>
 
   <!-- Subtitle -->
   <text x="18" y="46"
@@ -48,7 +48,7 @@
     letter-spacing="0.5">Last 7 days</text>
   <text x="214" y="104"
     font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">2h 12m</text>
+    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">1h 57m</text>
 
   <!-- Col 3: last 30 days -->
   <text x="354" y="78"
