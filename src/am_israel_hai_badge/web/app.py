@@ -175,22 +175,26 @@ async def dashboard(request: Request):
         badge_rows += f"""
     <div class="badge-card">
       <div class="badge-card-preview">
-        <img src="/badge/{b['token']}.svg" alt="badge" height="60"/>
+        <img src="/badge/{b['token']}.svg" alt="badge"/>
       </div>
-      <div class="badge-card-info">
+      <div class="badge-card-meta">
         <div class="badge-card-area">{areas}</div>
-        <div class="embed-label">Embed Code</div>
-        <div class="embed-row">
-          <input type="text" value="{embed}" readonly onclick="this.select()" class="embed-code"/>
+        <div class="embed-group">
+          <div class="embed-label">Embed Code</div>
+          <div class="embed-row">
+            <input type="text" value="{embed}" readonly onclick="this.select()" class="embed-code"/>
+            <button type="button" class="btn-icon btn-copy" title="Copy">
+              <svg class="icon-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              <svg class="icon-check" viewBox="0 0 24 24" style="display:none"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </button>
+            <form method="post" action="/api/badges/{b['token']}/delete"
+                  onsubmit="return confirm('Delete this badge?')" style="margin:0">
+              <button type="submit" class="btn-icon btn-delete" title="Delete">
+                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-      <div class="badge-card-actions">
-        <form method="post" action="/api/badges/{b['token']}/delete"
-              onsubmit="return confirm('Delete this badge?')">
-          <button type="submit" class="btn-delete">
-            <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-          </button>
-        </form>
       </div>
     </div>"""
 
