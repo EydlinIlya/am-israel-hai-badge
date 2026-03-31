@@ -39,7 +39,7 @@
     letter-spacing="0.5">Last 24 hours</text>
   <text x="74" y="104"
     font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">8m</text>
+    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">32m</text>
 
   <!-- Col 2: last 7 days -->
   <text x="214" y="78"
@@ -48,7 +48,7 @@
     letter-spacing="0.5">Last 7 days</text>
   <text x="214" y="104"
     font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">2h 17m</text>
+    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">2h 41m</text>
 
   <!-- Col 3: last 30 days -->
   <text x="354" y="78"
@@ -57,5 +57,5 @@
     letter-spacing="0.5">Last 30 days</text>
   <text x="354" y="104"
     font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">17h 39m</text>
+    font-size="22" font-weight="700" fill="#f0f1f2" text-anchor="middle">17h 26m</text>
 </svg>
